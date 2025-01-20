@@ -14,7 +14,10 @@ class GitHub_Updater
         $this->github_user = $github_user;
         $this->github_repo = $github_repo;
         $this->plugin_file = $plugin_file;
-
+        if (!function_exists('get_plugin_data')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+        var_dump($this->get_latest_version());
         add_filter('pre_set_site_transient_update_plugins', [$this, 'check_for_update']);
         add_filter('plugins_api', [$this, 'plugin_info'], 10, 3);
         add_filter('upgrader_post_install', [$this, 'after_update'], 10, 3);
@@ -45,19 +48,7 @@ class GitHub_Updater
 
 
 
-    public function after_update($response, $hook_extra, $result)
-    {
-        global $wp_filesystem;
-        $plugin_folder = WP_PLUGIN_DIR . '/' . dirname($this->plugin_slug);
-        $wp_filesystem->move($result['destination'], $plugin_folder);
-        $result['destination'] = $plugin_folder;
 
-        // Supprime les caches
-        delete_transient('github_plugin_latest_version');
-        delete_transient('github_plugin_download_url');
-
-        return $result;
-    }
 
 
     public function plugin_info($res, $action, $args)
@@ -90,6 +81,11 @@ class GitHub_Updater
         $plugin_folder = WP_PLUGIN_DIR . '/' . dirname($this->plugin_slug);
         $wp_filesystem->move($result['destination'], $plugin_folder);
         $result['destination'] = $plugin_folder;
+
+        // Supprime les caches
+        delete_transient('github_plugin_latest_version');
+        delete_transient('github_plugin_download_url');
+
         return $result;
     }
 
@@ -97,6 +93,7 @@ class GitHub_Updater
     {
         // Vérifie si la version est déjà mise en cache
         $cached_version = get_transient('github_plugin_latest_version');
+
         if ($cached_version) {
             return $cached_version;
         }
