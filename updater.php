@@ -134,6 +134,19 @@ class GitHub_Updater
 
         return false;
     }
+    public function clear_cache()
+    {
+        // Supprimer le cache de la version
+        delete_transient('github_plugin_latest_version');
+
+        // Supprimer le cache de l'URL de téléchargement
+        delete_transient('github_plugin_download_url');
+
+        // Vous pouvez également ajouter d'autres transients si nécessaire
+        do_action('github_updater_cache_cleared'); // Hook pour extensions futures
+
+        return true;
+    }
 
     private function get_current_version()
     {
