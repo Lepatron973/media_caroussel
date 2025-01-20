@@ -4,7 +4,7 @@
  * Plugin Name: Média Carousel
  * Plugin URI: https://github.com/Lepatron973/media_caroussel
  * Description: A WordPress plugin for adding audio carousels.
- * Version: 0.6
+ * Version: 0.3
  * Author: Lepatron973
  * Author URI: https://sunitronics.fr
  * Text Domain: media-carousel
