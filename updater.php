@@ -1,5 +1,6 @@
 <?php
 
+namespace AudioCarousel;
 
 class GitHub_Updater
 {
