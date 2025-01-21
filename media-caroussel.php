@@ -3,8 +3,8 @@
 /**
  * Plugin Name: Média Carousel
  * Plugin URI: https://github.com/Lepatron973/media_caroussel
- * Description: A WordPress plugin for adding audio carousels.
- * Version: 0.3
+ * Description: The Media Carousel plugin allows you to effortlessly add a beautiful, responsive carousel to your WordPress site. With the shortcode `[media_carousel]`, you can showcase your images in a sleek and interactive slider..
+ * Version: 0.4
  * Author: Lepatron973
  * Author URI: https://sunitronics.fr
  * Text Domain: media-carousel
